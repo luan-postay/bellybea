@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belly Bea | Treino & Praia </title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════
+       HEADER FIXO
+  ════════════════════════════════ -->
+  <header class="header" id="siteHeader">
+    <div class="header-inner">
+
+      <!-- Navegação esquerda -->
+      <nav class="header-nav">
+        <a href="#catalogo" class="nav-link">Catálogo</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+      </nav>
+
+      <!-- Logo central -->
+      <a href="#" class="logo" aria-label="Belly Bea - Página inicial">Belly Bea</a>
+
+      <!-- Ações direita -->
+      <div class="header-actions">
+        <a href="#contato" class="nav-link nav-link--hide">Contato</a>
+        <button class="cart-trigger" id="cartBtn" aria-label="Abrir carrinho">
+          <svg class="cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════
+       HERO — SLIDESHOW
+  ════════════════════════════════ -->
+  <section class="hero" id="hero" aria-label="Vitrine principal">
+
+    <!-- Slides -->
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide active" style="--bg: url('images/slider/img1.jpeg')">
+        <div class="hero-slide-overlay"></div>
+      </div>
+      <div class="hero-slide" style="--bg: url('images/slider/img2.jpeg')">
+        <div class="hero-slide-overlay"></div>
+      </div>
+      <div class="hero-slide" style="--bg: url('images/slider/img3.jpeg')">
+        <div class="hero-slide-overlay"></div>
+      </div>
+    </div>
+
+    <!-- Conteúdo hero -->
+    <div class="hero-content">
+      <p class="hero-eyebrow">Coleção Verão 2025</p>
+      <h1 class="hero-title">
+        <span class="hero-title-line">Do Mar</span>
+        <span class="hero-title-line hero-title-line--italic">à Academia</span>
+      </h1>
+      <p class="hero-subtitle">Peças que abraçam cada movimento com elegância.</p>
+      <a href="#catalogo" class="hero-cta">
+        <span>Explorar Coleção</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Dots de navegação -->
+    <div class="hero-dots" id="heroDots" role="tablist" aria-label="Slides">
+      <button class="hero-dot active" role="tab" data-slide="0" aria-label="Slide 1" aria-selected="true"></button>
+      <button class="hero-dot" role="tab" data-slide="1" aria-label="Slide 2" aria-selected="false"></button>
+      <button class="hero-dot" role="tab" data-slide="2" aria-label="Slide 3" aria-selected="false"></button>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="hero-scroll-hint">
+      <div class="hero-scroll-line"></div>
+      <span>scroll</span>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════
+       BARRA DE FILTROS
+  ════════════════════════════════ -->
+  <section class="filters-section" id="catalogo">
+    <div class="filters-wrapper">
+      <div class="filters-left">
+        <h2 class="section-title">Catálogo</h2>
+        <span class="product-count" id="productCount">6 peças</span>
+      </div>
+      <div class="filters-right">
+        <button class="filter-pill active" data-filter="todos">Todos</button>
+        <button class="filter-pill" data-filter="praia">🌊 Praia</button>
+        <button class="filter-pill" data-filter="fitness">💪 Fitness</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       GRID DE PRODUTOS
+  ════════════════════════════════ -->
+  <main class="catalog-grid" id="catalogGrid" aria-label="Catálogo de produtos"></main>
+
+  <!-- ════════════════════════════════
+       MODAL DE PRODUTO
+  ════════════════════════════════ -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalProductName">
+    <div class="modal" id="productModal">
+
+      <!-- Fechar -->
+      <button class="modal-close" id="modalClose" aria-label="Fechar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <!-- Coluna esquerda: imagens -->
+      <div class="modal-gallery">
+
+        <!-- Imagem principal -->
+        <div class="gallery-main">
+          <img class="gallery-main-img" id="galleryMainImg" src="" alt="" />
+          <button class="gallery-arrow gallery-arrow--prev" id="galleryPrev" aria-label="Imagem anterior">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="gallery-arrow gallery-arrow--next" id="galleryNext" aria-label="Próxima imagem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div class="gallery-counter" id="galleryCounter">1 / 4</div>
+        </div>
+
+        <!-- Miniaturas -->
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+
+      </div>
+
+      <!-- Coluna direita: detalhes -->
+      <div class="modal-details">
+        <p class="modal-category" id="modalCategory"></p>
+        <h2 class="modal-product-name" id="modalProductName"></h2>
+        <p class="modal-desc" id="modalDesc"></p>
+
+        <!-- Preços -->
+        <div class="modal-pricing">
+          <div class="pricing-block pricing-block--highlight">
+            <span class="pricing-label">Pronta Entrega</span>
+            <span class="pricing-value" id="modalPricePronta"></span>
+          </div>
+          <div class="pricing-block">
+            <span class="pricing-label">Sob Encomenda</span>
+            <span class="pricing-value pricing-value--secondary" id="modalPriceEnc"></span>
+          </div>
+        </div>
+
+        <!-- Tamanhos -->
+        <div class="modal-sizes-section">
+          <p class="modal-sizes-label">Selecione o tamanho <span class="sizes-required">*</span></p>
+          <div class="modal-sizes" id="modalSizes"></div>
+        </div>
+
+        <!-- Botão adicionar -->
+        <button class="btn-add-modal" id="btnAddModal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Adicionar ao Carrinho
+        </button>
+
+        <!-- Detalhes adicionais -->
+        <div class="modal-info">
+          <details class="info-accordion">
+            <summary>Composição & Cuidados</summary>
+            <p id="modalComposicao"></p>
+          </details>
+          <details class="info-accordion">
+            <summary>Envio & Entrega</summary>
+            <p>Pronta entrega: envio em até 2 dias úteis. Sob encomenda: prazo de 15 a 20 dias úteis após confirmação do pedido.</p>
+          </details>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       SEÇÃO SOBRE
+  ════════════════════════════════ -->
+  <section class="about-section" id="sobre">
+    <div class="about-inner">
+      <div class="about-text">
+        <p class="section-eyebrow">Nossa Essência</p>
+        <h2 class="about-title">Feito para quem<br/><em>vive intensamente</em></h2>
+        <p class="about-body">Nascemos da paixão pelo sol, pelo mar e pelo movimento. Cada peça é pensada para acompanhar você da praia à academia — com caimento perfeito, tecidos premium e estilo que fala por si só.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Qualidade</span></div>
+        <div class="stat"><span class="stat-num">+500</span><span class="stat-label">Clientes</span></div>
+        <div class="stat"><span class="stat-num">6</span><span class="stat-label">Coleções</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       CARRINHO SIDEBAR
+  ════════════════════════════════ -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar" role="complementary" aria-label="Carrinho de compras">
+
+    <div class="cart-header">
+      <div class="cart-header-left">
+        <h2 class="cart-title">Meu Pedido</h2>
+        <span class="cart-item-count" id="cartItemCount">0 itens</span>
+      </div>
+      <button class="cart-close" id="cartClose" aria-label="Fechar carrinho">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Estado vazio -->
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-illus">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      </div>
+      <p class="cart-empty-title">Seu carrinho está vazio</p>
+      <p class="cart-empty-sub">Explore o catálogo e encontre suas peças favoritas</p>
+      <button class="btn-outline-dark" onclick="fecharCarrinho()">Ver Catálogo</button>
+    </div>
+
+    <!-- Lista de itens -->
+    <ul class="cart-items" id="cartItems"></ul>
+
+    <!-- Rodapé do carrinho -->
+    <div class="cart-footer" id="cartFooter" hidden>
+      <div class="cart-subtotal">
+        <div class="subtotal-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">R$ 0,00</span>
+        </div>
+        <div class="subtotal-divider"></div>
+        <div class="subtotal-row subtotal-row--total">
+          <span>Total</span>
+          <strong id="cartTotal">R$ 0,00</strong>
+        </div>
+      </div>
+      <button class="btn-whatsapp" id="btnWhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Finalizar pelo WhatsApp
+      </button>
+      <p class="cart-disclaimer">Você será redirecionada ao WhatsApp com seu pedido completo.</p>
+    </div>
+
+  </aside>
+
+  <!-- ════════════════════════════════
+       TOAST
+  ════════════════════════════════ -->
+  <div class="toast" id="toast" role="alert" aria-live="assertive">
+    <span id="toastMsg"></span>
+  </div>
+
+  <!-- ════════════════════════════════
+       FOOTER
+  ════════════════════════════════ -->
+  <footer class="footer" id="contato">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">Belly Bea</p>
+        <p class="footer-tagline">Moda Praia & Fitness</p>
+      </div>
+      <div class="footer-links">
+        <p class="footer-section-title">Navegação</p>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#sobre">Sobre</a>
+      </div>
+      <div class="footer-contact" id="contato-info">
+        <p class="footer-section-title">Contato</p>
+        <p>WhatsApp: +55 (51) 99980-3234</p>
+        <p>Instagram: @belly.bea</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Belly Bea — Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
